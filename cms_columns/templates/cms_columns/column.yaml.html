@@ -1,4 +1,4 @@
-{% if plugin.first %}
+{% if first_column %}
 <div class="subcolumns">
 {% endif %}
     <div class="c{{ column_width }}{% if last_column %}r{% else %}l{% endif %}">
@@ -6,11 +6,6 @@
             {{ content|safe }}
         </div>
     </div>
-{% if plugin.last %}
-</div>
-{% else %}
 {% if last_column %}
 </div>
-<div class="subcolumns">
-{% endif %}
 {% endif %}
