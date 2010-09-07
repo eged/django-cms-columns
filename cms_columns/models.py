@@ -24,4 +24,8 @@ class TextColumn(AbstractText):
     pass
 
 class ManualBreak(CMSPlugin):
-    pass
+    column_width = '100'
+
+class VisualBreak(CMSPlugin):
+    css_class = models.CharField(_("CSS Class"), max_length=100, default="visual-break", blank=True)
+
