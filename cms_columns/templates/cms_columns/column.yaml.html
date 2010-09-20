@@ -1,11 +1,15 @@
 {% if first_column %}
 <div class="subcolumns">
 {% endif %}
+{% if column_width < 100 %}
     <div class="c{{ column_width }}{% if last_column %}r{% else %}l{% endif %}">
         <div class="subc{% if last_column %}r{% else %}l{% endif %}">
+{% endif %}
             {{ content|safe }}
+{% if column_width < 100 %}
         </div>
     </div>
+{% endif %}
 {% if last_column %}
 </div>
 {% endif %}
