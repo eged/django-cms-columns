@@ -18,6 +18,8 @@ def register(model, plugin=None):
             field.contribute_to_class(model, field.attname)
     if plugin:
         if hasattr(plugin, 'fieldsets') and plugin.fieldsets:
+            if isinstance(plugin.fieldsets, tuple):
+                plugin.fieldsets = list(plugin.fieldsets)
             plugin.fieldsets.append((_('Column'), {'fields': CONTRIBUTE_FIELDS}))
 
 def get_model_from_string(model_path):
