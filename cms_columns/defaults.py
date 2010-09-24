@@ -12,3 +12,8 @@ CMS_COLUMNS_WIDTH_CHOICES = (
     ('33', _('%s%% wide') % '33'),
     ('25', _('%s%% wide') % '25'),
 )
+
+CMS_COLUMNS_EXCLUDE_PLUGINS = (
+    'Link',
+    'Picture'
+)

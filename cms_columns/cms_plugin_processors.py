@@ -6,8 +6,9 @@ import app_settings
 _current_row_width = 0
 
 def columns(instance, placeholder, rendered_content, original_context):
-    if not instance._render_meta.text_enabled and \
-        (not hasattr(settings, 'CMS_COLUMNS_PLACEHOLDERS') or placeholder.slot in settings.CMS_COLUMNS_PLACEHOLDERS):
+    exclude_plugins = app_settings.get('CMS_COLUMNS_EXCLUDE_PLUGINS')
+    if (instance.__class__.__name__ not in exclude_plugins) \
+        and (not hasattr(settings, 'CMS_COLUMNS_PLACEHOLDERS') or placeholder.slot in settings.CMS_COLUMNS_PLACEHOLDERS):
             global _current_row_width
             if original_context['plugin']['first']:
                 _current_row_width = 0
