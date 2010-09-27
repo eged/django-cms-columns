@@ -27,7 +27,7 @@ class ManualBreak(CMSPlugin):
     column_width = '100'
     
     def __unicode__(self):
-        return u'%d' % self.column_width
+        return u'%s' % self.column_width
 
 class VisualBreak(CMSPlugin):
     css_class = models.CharField(_("CSS Class"), max_length=100, default="visual-break", blank=True)
