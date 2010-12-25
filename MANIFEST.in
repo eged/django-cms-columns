@@ -1,0 +1,3 @@
+include README.md
+recursive-include cms_columns/locale *
+recursive-include cms_columns/templates *
