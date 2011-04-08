@@ -29,8 +29,13 @@ class ManualBreak(CMSPlugin):
     def __unicode__(self):
         return u'%s' % self.column_width
 
+CMS_VISUAL_BREAK_OPTIONS = getattr(settings, 'CMS_VISUAL_BREAK_OPTIONS', (
+                                                        ('vertical-space', _('Vertical Space')),
+                                                        ('visual-break', _('Visual Break')),
+                                                    )
+                                        )
 class VisualBreak(CMSPlugin):
-    css_class = models.CharField(_("CSS Class"), max_length=100, default="visual-break", blank=True)
+    css_class = models.CharField(_("CSS Class"), max_length=100, default="visual-break", blank=True, choices=CMS_VISUAL_BREAK_OPTIONS)
     
     def __unicode__(self):
         return u'%s' % self.css_class
