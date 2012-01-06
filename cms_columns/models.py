@@ -8,7 +8,7 @@ from cms.models import CMSPlugin
 from cms.plugins.text.models import AbstractText
 from cms.plugins.text.utils import plugin_admin_html_to_tags, plugin_tags_to_admin_html
 
-from cms_columns import app_settings 
+from cms_columns import app_settings
 
 class AbstractColumn(models.Model):
     column_width = models.CharField(_("Column width"), max_length=6, choices=app_settings.get('CMS_COLUMNS_WIDTH_CHOICES'), default='100', null=True, blank=True)
@@ -25,7 +25,7 @@ class TextColumn(AbstractText):
 
 class ManualBreak(CMSPlugin):
     column_width = '100'
-    
+
     def __unicode__(self):
         return u'%s' % self.column_width
 
@@ -36,6 +36,13 @@ CMS_VISUAL_BREAK_OPTIONS = getattr(settings, 'CMS_VISUAL_BREAK_OPTIONS', (
                                         )
 class VisualBreak(CMSPlugin):
     css_class = models.CharField(_("CSS Class"), max_length=100, default="visual-break", blank=True, choices=CMS_VISUAL_BREAK_OPTIONS)
-    
+
     def __unicode__(self):
         return u'%s' % self.css_class
+
+class SectionBreak(CMSPlugin):
+    title = models.CharField(_('Title'), max_length=255)
+    css_class = models.CharField(_("CSS Class"), max_length=100, default="section-break", blank=True, null=True)
+
+    def __unicode__(self):
+        return u'%s' % self.title
