@@ -6,8 +6,7 @@ from django.utils.text import truncate_words
 
 from cms.models import CMSPlugin
 from cms.plugins.text.models import AbstractText
-from cms.plugins.text.utils import plugin_admin_html_to_tags, plugin_tags_to_admin_html
-
+from cms.plugins.text.utils import plugin_admin_html_to_tags, plugin_tags_to_admin_html, replace_plugin_tags
 from cms_columns import app_settings
 
 class AbstractColumn(models.Model):
@@ -21,7 +20,18 @@ class AbstractColumn(models.Model):
         return result + " ] [ "+u" %s" % (truncate_words(strip_tags(self.body), 3)[:30]+"...")
 
 class TextColumn(AbstractText):
-    pass
+
+    def post_copy(self, old_instance, ziplist):
+        """
+        Fix references to plugins
+        """
+
+        replace_ids = {}
+        for new, old in ziplist:
+            replace_ids[old.pk] = new.pk
+
+        self.body = replace_plugin_tags(old_instance.textcolumn.body, replace_ids)
+        self.save()
 
 class ManualBreak(CMSPlugin):
     column_width = '100'
